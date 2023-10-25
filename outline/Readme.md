@@ -1,1 +1,2 @@
-k8s >=1.19.0
+- k8s >=1.19.0
+- copies some source code from bitnami charts, especially mastodon which has similar stack.

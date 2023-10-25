@@ -5,3 +5,5 @@ metadata:
   labels:
     {{- include "outline.labels" . | nindent 4 }}
 data:
+  DATABASE_URL: {{ include "outline.database.host" . | quote }}
+  REDIS_URL: {{ include "outline.redis.host" . | quote }}
