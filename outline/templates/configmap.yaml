@@ -7,3 +7,14 @@ metadata:
 data:
   DATABASE_URL: {{ include "outline.database.host" . | quote }}
   REDIS_URL: {{ include "outline.redis.host" . | quote }}
+  # for now, only support s3 file storage for simplicity.
+  FILE_STORAGE: s3
+
+  # S3 configuration (public)
+
+  AWS_REGION: {{ include "outline.s3.region" . | quote }}
+  AWS_S3_FORCE_PATH_STYLE: true
+  AWS_S3_UPLOAD_BUCKET_NAME: {{ include "outline.s3.bucket" . | quote }}
+  AWS_S3_UPLOAD_BUCKET_URL: {{ include "outline.s3.endpoint" . | quote }}
+  AWS_S3_UPLOAD_MAX_SIZE: 26214400
+  
