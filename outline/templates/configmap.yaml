@@ -16,8 +16,8 @@ data:
   # REDIS
   # from bitnami's outline chart.
   # will be combined into REDIS_URL the deployment.
-  REDIS_HOST: {{ include "outline.redis.host" . | quote }}
-  REDIS_PORT: {{ include "outline.redis.port" . | quote }}
+  OUTLINE_REDIS_HOST: {{ include "outline.redis.host" . | quote }}
+  OUTLINE_REDIS_PORT: {{ include "outline.redis.port" . | quote }}
 
   # for now, only support s3 file storage for simplicity.
   FILE_STORAGE: "s3"
