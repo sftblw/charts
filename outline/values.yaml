@@ -96,6 +96,135 @@ affinity: {}
 # https://github.com/bitnami/charts/blob/main/bitnami/mastodon/templates/_helpers.tpl
 # https://github.com/bitnami/charts/blob/main/bitnami/mastodon/values.yaml
 
+
+
+
+## @section PostgreSQL chart configuration
+## ref: https://github.com/bitnami/charts/blob/main/bitnami/postgresql/values.yaml
+## @param postgresql.enabled Switch to enable or disable the PostgreSQL helm chart
+## @param postgresql.auth.username Name for a custom user to create
+## @param postgresql.auth.password Password for the custom user to create
+## @param postgresql.auth.database Name for a custom database to create
+## @param postgresql.auth.existingSecret Name of existing secret to use for PostgreSQL credentials
+## @param postgresql.architecture PostgreSQL architecture (`standalone` or `replication`)
+## @param postgresql.primary.service.ports.postgresql PostgreSQL service port
+##
+postgresql:
+  enabled: true
+  auth:
+    username: outline
+    password: ""
+    database: outline_db
+    existingSecret: ""
+  architecture: standalone
+  primary:
+    service:
+      ports:
+        postgresql: 5432
+
+
+## External PostgreSQL configuration
+## All of these values are only used when postgresql.enabled is set to false
+## @param externalDatabase.host Database host
+## @param externalDatabase.port Database port number
+## @param externalDatabase.user Non-root username for JupyterHub
+## @param externalDatabase.password Password for the non-root username for JupyterHub
+## @param externalDatabase.database JupyterHub database name
+## @param externalDatabase.existingSecret Name of an existing secret resource containing the database credentials
+## @param externalDatabase.existingSecretPasswordKey Name of an existing secret key containing the database credentials
+##
+externalDatabase:
+  host: ""
+  port: 5432
+  user: postgres
+  database: mastodon
+  password: ""
+  existingSecret: ""
+  existingSecretPasswordKey: "db-password"
+
+
+## @section Redis sub-chart parameters
+##
+redis:
+  ## @param redis.enabled Deploy Redis subchart
+  ##
+  enabled: true
+  ## @param redis.architecture Set Redis architecture
+  ##
+  architecture: standalone
+  ## @param redis.existingSecret Name of a secret containing redis credentials
+  ##
+  existingSecret: ""
+  ## @param redis.master.service.ports.redis Redis port
+  ##
+  master:
+    service:
+      ports:
+        redis: 6379
+
+
+## @section External Redis parameters
+## All of these values are only used when redis.enabled is set to false
+## @param externalRedis.host Redis host
+## @param externalRedis.port Redis port number
+## @param externalRedis.password Password for the Redis
+## @param externalRedis.existingSecret Name of an existing secret resource containing the Redis credentials
+## @param externalRedis.existingSecretPasswordKey Name of an existing secret key containing the Redis credentials
+##
+externalRedis:
+  host: ""
+  port: 6379
+  password: ""
+  existingSecret: ""
+  existingSecretPasswordKey: ""
+
+
+## @section MinIO&reg; chart parameters
+## @extra minio For full list of MinIO&reg; values configurations please refere [here](https://github.com/bitnami/charts/tree/main/bitnami/minio)
+##
+minio:
+  ## @param minio.enabled Enable/disable MinIO&reg; chart installation
+  ## to be used as an objstore for Mastodon
+  ##
+  enabled: true
+  ## MinIO&reg; authentication parameters
+  ##
+  auth:
+    ## @param minio.auth.rootUser MinIO&reg; root username
+    ##
+    rootUser: admin
+    ## @param minio.auth.rootPassword Password for MinIO&reg; root user
+    ##
+    rootPassword: ""
+    ## @param minio.auth.existingSecret Name of an existing secret containing the MinIO&reg; credentials
+    ##
+    existingSecret: ""
+  ## @param minio.defaultBuckets Comma, semi-colon or space separated list of MinIO&reg; buckets to create
+  ##
+  defaultBuckets: "s3storage"
+
+  ## @param minio.provisioning.enabled Enable/disable MinIO&reg; provisioning job
+  ## @param minio.provisioning.extraCommands Extra commands to run on MinIO&reg; provisioning job
+  ##
+  provisioning:
+    enabled: true
+    # We need to allow downloads in order for the UI to work
+    extraCommands: ["mc anonymous set download provisioning/s3storage"]
+
+  ## @param minio.tls.enabled Enable/disable MinIO&reg; TLS support
+  ##
+  tls:
+    enabled: false
+  ## @param minio.service.type MinIO&reg; service type
+  ## @param minio.service.loadBalancerIP MinIO&reg; service LoadBalancer IP
+  ## @param minio.service.ports.api MinIO&reg; service port
+  ##
+  service:
+    type: ClusterIP
+    loadBalancerIP: ""
+    ports:
+      api: 80
+
 ## @section External S3 parameters
 ## All of these values are only used when redis.enabled is set to false
 ## @param externalS3.host External S3 host
@@ -120,24 +249,3 @@ externalS3:
   protocol: "https"
   bucket: "outline"
   region: "us-east-1"
-
-
-# https://github.com/bitnami/charts/tree/main/bitnami/postgresql
-postgresql:
-  enabled: true
-  global.storageClass: ""
-  auth:
-    database: outline-database
-    username: outline
-    password: outline-db-insecure-password
-
-    # Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
-    enablePostgresUser: true
-    postgresPassword: outline-db-insecure-password-admin
-
-
-redis:
-  enabled: true
-
-minio:
-  enabled: false

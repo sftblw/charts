@@ -161,7 +161,12 @@ Retrieve key of the PostgreSQL secret
 
 
 
-
+{{/*
+Return MinIO(TM) fullname
+*/}}
+{{- define "outline.minio.fullname" -}}
+{{- include "common.names.dependency.fullname" (dict "chartName" "minio" "chartValues" .Values.minio "context" $) -}}
+{{- end -}}
 
 {{/*
 Return the S3 backend host

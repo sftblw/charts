@@ -47,13 +47,46 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:
 
+          # env: depends
           envFrom:
             - configMapRef:
                 name: {{ include "outline.fullname" . }}-configmap
             - secretRef:
                 name: {{ include "outline.fullname" . }}-secret
+          
+          env:
+            - name: OUTLINE_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "outline.database.secretName" . }}
+                  key: {{ include "outline.database.passwordKey" . | quote }}
+            {{- if (include "outline.redis.auth.enabled" .) }}
+            - name: OUTLINE_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "outline.redis.secretName" . }}
+                  key: {{ include "outline.redis.passwordKey" . | quote }}
+            {{- end }}
+
+            # env: direct get
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "outline.s3.secretName" . }}
+                  key: {{ include "outline.s3.accessKeyIDKey" . | quote }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "outline.s3.secretName" . }}
+                  key: {{ include "outline.s3.secretAccessKeyKey" . | quote }}
+
+            # combined
+            - name: DATABASE_URL
+              value: "postgresql://$(OUTLINE_DATABASE_USERNAME):$(OUTLINE_DATABASE_PASSWORD)@$(OUTLINE_DATABASE_HOST):$(OUTLINE_DATABASE_PORT_NUMBER)/$(OUTLINE_DATABASE_NAME)"
+            - name: REDIS_URL
+              value: "redis://$(REDIS_HOST):$(REDIS_PORT)"
+            
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

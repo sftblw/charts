@@ -5,16 +5,31 @@ metadata:
   labels:
     {{- include "outline.labels" . | nindent 4 }}
 data:
-  DATABASE_URL: {{ include "outline.database.host" . | quote }}
-  REDIS_URL: {{ include "outline.redis.host" . | quote }}
+  # DB
+  # from bitnami's outline chart.
+  # will be combined into DATABASE_URL the deployment.
+  OUTLINE_DATABASE_HOST: {{ include "outline.database.host" . | quote }}
+  OUTLINE_DATABASE_PORT_NUMBER: {{ include "outline.database.port" . | quote }}
+  OUTLINE_DATABASE_NAME: {{ include "outline.database.name" . | quote }}
+  OUTLINE_DATABASE_USERNAME: {{ include "outline.database.user" . | quote }}
+
+  # REDIS
+  # from bitnami's outline chart.
+  # will be combined into REDIS_URL the deployment.
+  REDIS_HOST: {{ include "outline.redis.host" . | quote }}
+  REDIS_PORT: {{ include "outline.redis.port" . | quote }}
+
   # for now, only support s3 file storage for simplicity.
-  FILE_STORAGE: s3
+  FILE_STORAGE: "s3"
 
   # S3 configuration (public)
 
-  AWS_REGION: {{ include "outline.s3.region" . | quote }}
-  AWS_S3_FORCE_PATH_STYLE: true
   AWS_S3_UPLOAD_BUCKET_NAME: {{ include "outline.s3.bucket" . | quote }}
   AWS_S3_UPLOAD_BUCKET_URL: {{ include "outline.s3.endpoint" . | quote }}
-  AWS_S3_UPLOAD_MAX_SIZE: 26214400
+  AWS_REGION: {{ include "outline.s3.region" . | quote }}
+  AWS_S3_FORCE_PATH_STYLE: "true"
+  AWS_S3_ACL: private
+  # S3_HOSTNAME: {{ include "outline.s3.host" . | quote }}
+  # S3_ALIAS_HOST: {{ include "outline.s3.aliasHost" . | quote }}
+  # S3_PROTOCOL: {{ include "outline.s3.protocol.setting" . | quote }}
   
