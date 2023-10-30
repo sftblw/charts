@@ -1,5 +1,6 @@
 debug_template.sh
 values_my.yaml
+ref
 
 # Patterns to ignore when building packages.
 # This supports shell glob matching, relative path matching, and
