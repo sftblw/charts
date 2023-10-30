@@ -1,6 +1,6 @@
 apiVersion: v2
 name: outline
-description: A Helm chart for Kubernetes
+description: outlinewiki, third-party helm package. 
 
 # A chart can be either an 'application' or a 'library' chart.
 #
