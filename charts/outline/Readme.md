@@ -8,6 +8,15 @@
 
 I mainly focus on storage class and ingress.
 
+### install instruction
+
+```
+helm repo add sftblw https://sftblw.github.io/charts
+helm upgrade --install outline sftblw/outline --values ./values.yaml --namespace outline --create-namespace
+```
+
+### values.yaml sample
+
 ```yaml
 # Default values for outline.
 # This is a YAML-formatted file.
