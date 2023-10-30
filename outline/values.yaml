@@ -48,6 +48,8 @@ auth:
   # See documentation for whichever IdP you use to acquire the following info:
   # Redirect URI is https://<URL>/auth/oidc.callback
   oidcClientId: ""
+  # https://github.com/outline/outline/discussions/3299#discussioncomment-2483067
+  # if possible, generate it manually. If you are using authentik, this will be happen.
   oidcClientSecret: ""
   oidcAuthUri: ""
   oidcTokenUri: ""
