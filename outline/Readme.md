@@ -1,2 +1,2 @@
 - k8s >=1.19.0
-- copies some source code from bitnami charts, especially mastodon which has similar stack. which is under [Apache 2.0](https://github.com/bitnami/charts/blob/main/LICENSE.md)
+- copies some many source code from bitnami charts, especially mastodon which has similar stack. which is under [Apache 2.0](https://github.com/bitnami/charts/blob/main/LICENSE.md)
