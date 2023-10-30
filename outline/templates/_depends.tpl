@@ -182,6 +182,7 @@ Return the S3 backend host
 {{/*
 Return the S3 alias host
 */}}
+{{/*
 {{- define "outline.s3.aliasHost" -}}
     {{- if .Values.s3AliasHost -}}
         {{- print .Values.s3AliasHost -}}
@@ -195,6 +196,7 @@ Return the S3 alias host
         {{- print .Values.externalS3.host -}}
     {{- end -}}
 {{- end -}}
+*/}}
 
 {{/*
 Return the S3 bucket

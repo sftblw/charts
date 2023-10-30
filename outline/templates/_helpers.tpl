@@ -68,9 +68,9 @@ Create the name of the service account to use
 {{/*
 Return the proper Outline web domain
 */}}
+{{- /*
 {{- define "outline.web.domain" -}}
     {{- print .Values.webDomain -}}
-{{- /*
     {{- if .Values.webDomain -}}
         {{- print .Values.webDomain -}}
     {{- else if .Values.apache.enabled -}}
@@ -80,5 +80,5 @@ Return the proper Outline web domain
         {{- print .Values.apache.service.loadBalancerIP -}}
         {{- end -}}
     {{- end -}}
-*/ -}}
 {{- end -}}
+*/ -}}
