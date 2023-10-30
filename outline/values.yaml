@@ -4,16 +4,54 @@
 
 replicaCount: 1
 
-env:
-  nodeEnv: "production"
 
-  # Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
-  # in your terminal to generate a random value.
-  secretKey: ""
-  # Generate a unique random key. The format is not important but you could still use
-  # `openssl rand -hex 32` in your terminal to produce this.
-  utilsSecret: ""
+# Generate a hex-encoded 32-byte random key. You should use `openssl rand -hex 32`
+# in your terminal to generate a random value.
+secretKey: ""
+# Generate a unique random key. The format is not important but you could still use
+# `openssl rand -hex 32` in your terminal to produce this.
+utilsSecret: ""
 
+auth:
+  # To configure Slack auth, you'll need to create an Application at
+  # => https://api.slack.com/apps
+  #
+  # When configuring the Client ID, add a redirect URL under "OAuth & Permissions":
+  # https://<URL>/auth/slack.callback
+  slackClientId: ""
+  slackClientSecret: ""
+
+  # To configure Google auth, you'll need to create an OAuth Client ID at
+  # => https://console.cloud.google.com/apis/credentials
+  #
+  # When configuring the Client ID, add an Authorized redirect URI:
+  # https://<URL>/auth/google.callback
+  googleClientId: ""
+  googleClientSecret: ""
+
+  # To configure Microsoft/Azure auth, you'll need to create an OAuth Client. See
+  # the guide for details on setting up your Azure App:
+  # => https://wiki.generaloutline.com/share/dfa77e56-d4d2-4b51-8ff8-84ea6608faa4
+  azureClientId: ""
+  azureClientSecret: ""
+  azureResourceAppId: ""
+
+  # To configure generic OIDC auth, you'll need some kind of identity provider.
+  # See documentation for whichever IdP you use to acquire the following info:
+  # Redirect URI is https://<URL>/auth/oidc.callback
+  oidcClientId: ""
+  oidcClientSecret: ""
+  oidcAuthUri: ""
+  oidcTokenUri: ""
+  oidcUserinfoUri: ""
+  
+  # Specify which claims to derive user information from
+  # Supports any valid JSON path with the JWT payload
+  oidcUsernameClaim: "preferred_username"
+  # Display name for OIDC authentication
+  oidcDisplayName: "OpenID Connect"
+  # Space separated auth scopes.
+  oidcScopes: "openid profile email"
 
 image:
   # Overrides the image repository. default: docker.getoutline.com/outlinewiki/outline

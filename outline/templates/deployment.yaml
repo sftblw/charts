@@ -56,6 +56,8 @@ spec:
                 name: {{ include "outline.fullname" . }}-secret
           
           env:
+            - name: "NODE_ENV"
+              value: "production"
             - name: OUTLINE_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:

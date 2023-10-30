@@ -33,6 +33,6 @@ data:
   # {{/* S3_ALIAS_HOST: {{ include "outline.s3.aliasHost" . | quote }} */}}
   # {{/* S3_PROTOCOL: {{ include "outline.s3.protocol.setting" . | quote }} */}}
   
-  {{ include "outline.utils.config_if" (list "OIDC_USERNAME_CLAIM" (.Values.auth).oidcUserinfoUri) }}
-  {{ include "outline.utils.config_if" (list "OIDC_DISPLAY_NAME" (.Values.auth).oidcUserinfoUri) }}
-  {{ include "outline.utils.config_if" (list "OIDC_SCOPES" (.Values.auth).oidcUserinfoUri) }}
+  {{ include "outline.utils.config_if" (list "OIDC_USERNAME_CLAIM" (.Values.auth).oidcUsernameClaim) }}
+  {{ include "outline.utils.config_if" (list "OIDC_DISPLAY_NAME" (.Values.auth).oidcDisplayName) }}
+  {{ include "outline.utils.config_if" (list "OIDC_SCOPES" (.Values.auth).oidcScopes) }}
