@@ -89,6 +89,18 @@ spec:
             - name: REDIS_URL
               value: "redis://:$(OUTLINE_REDIS_PASSWORD)@$(OUTLINE_REDIS_HOST):$(OUTLINE_REDIS_PORT)"
 
+            # web envs
+            - name: URL
+              value: {{ default (index .Values.ingress.hosts 0).host .Values.url | quote }}
+            - name: PORT
+              value: {{ .Values.service.port | default 3000 | quote }}
+
+            # troubleshooting
+            # disable for now. TODO: postgresql.tls.enabled
+            # "level":"error","message":"The database does not support SSL connections. Set the `PGSSLMODE` environment variable to `disable` or enable SSL on your database server."
+            - name: PGSSLMODE
+              value: "disable"
+
             
       {{- with .Values.nodeSelector }}
       nodeSelector:

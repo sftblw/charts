@@ -12,6 +12,13 @@ secretKey: ""
 # `openssl rand -hex 32` in your terminal to produce this.
 utilsSecret: ""
 
+# URL should point to the fully qualified, publicly accessible URL.
+# This is env var URL for external access.
+# If this is undefined, first ingress host will be used.
+# example:
+# url: https://app.outline.dev
+url: ""
+
 auth:
   # To configure Slack auth, you'll need to create an Application at
   # => https://api.slack.com/apps
