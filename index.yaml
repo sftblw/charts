@@ -1,0 +1,32 @@
+apiVersion: v1
+entries:
+  outline:
+  - apiVersion: v2
+    appVersion: 0.72.2
+    created: "2023-10-30T16:37:50.231537317Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.1.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.1.5
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.8.18
+    description: A Helm chart for Kubernetes
+    digest: 34de7593bbcbbda329820b8b319706dd7e7ff0a7b8c2023079fc88c4ee21b5da
+    name: outline
+    type: application
+    urls:
+    - https://github.com/sftblw/charts/releases/download/outline-0.1.0/outline-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-10-30T16:37:50.231550217Z"
