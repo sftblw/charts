@@ -49,16 +49,16 @@ spec:
             successThreshold: {{ (.Values.livenessProbe).successThreshold | default 1 }}
             failureThreshold: {{ (.Values.livenessProbe).failureThreshold | default 6 }}
           {{- end }}
-          {{- if (.Values.redinessProbe).enabled | default true }}
-          redinessProbe:
+          {{- if (.Values.readinessProbe).enabled | default true }}
+          readinessProbe:
             httpGet:
-              path: {{ (.Values.redinessProbe).path | default "/_health" | quote }}
-              port: {{ (.Values.redinessProbe).port | default "http" }}
-            initialDelaySeconds: {{ (.Values.redinessProbe).initialDelaySeconds | default 30 }}
-            timeoutSeconds: {{ (.Values.redinessProbe).timeoutSeconds | default 5 }}
-            periodSeconds: {{ (.Values.redinessProbe).periodSeconds | default 10 }}
-            successThreshold: {{ (.Values.redinessProbe).successThreshold | default 1 }}
-            failureThreshold: {{ (.Values.redinessProbe).failureThreshold | default 5 }}
+              path: {{ (.Values.readinessProbe).path | default "/_health" | quote }}
+              port: {{ (.Values.readinessProbe).port | default "http" }}
+            initialDelaySeconds: {{ (.Values.readinessProbe).initialDelaySeconds | default 30 }}
+            timeoutSeconds: {{ (.Values.readinessProbe).timeoutSeconds | default 5 }}
+            periodSeconds: {{ (.Values.readinessProbe).periodSeconds | default 10 }}
+            successThreshold: {{ (.Values.readinessProbe).successThreshold | default 1 }}
+            failureThreshold: {{ (.Values.readinessProbe).failureThreshold | default 5 }}
           {{- end }}
           
           resources:
