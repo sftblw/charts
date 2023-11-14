@@ -7,9 +7,9 @@ dependencies:
   version: 13.2.9
 - name: redis
   repository: https://charts.bitnami.com/bitnami
-  version: 18.3.2
+  version: 18.3.3
 - name: minio
   repository: https://charts.bitnami.com/bitnami
   version: 12.10.0
-digest: sha256:222aee29da1ede7a232b83f79fd69cae72747177e9d83e1be194003535d45c15
-generated: "2023-11-14T13:46:19.232261348+09:00"
+digest: sha256:af403a0cd5bfcd517aa3e39aaad90b2f319ba5bb4b5d0b5a62c6fb9b80c6559c
+generated: "2023-11-14T23:35:54.9484693+09:00"
