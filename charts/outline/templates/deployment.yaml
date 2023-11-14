@@ -37,16 +37,30 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port | default 3000 }}
               protocol: TCP
-          {{/*
+              
+          {{- if (.Values.livenessProbe).enabled | default true }}
           livenessProbe:
             httpGet:
-              path: /
-              port: http
-          readinessProbe:
+              path: {{ (.Values.redinessProbe).path | default "/_health" | quote }}
+              port: {{ (.Values.livenessProbe).port | default "http" }}
+            initialDelaySeconds: {{ (.Values.livenessProbe).initialDelaySeconds | default 180 }}
+            timeoutSeconds: {{ (.Values.livenessProbe).timeoutSeconds | default 5 }}
+            periodSeconds: {{ (.Values.livenessProbe).periodSeconds | default 20 }}
+            successThreshold: {{ (.Values.livenessProbe).successThreshold | default 1 }}
+            failureThreshold: {{ (.Values.livenessProbe).failureThreshold | default 6 }}
+          {{- end }}
+          {{- if (.Values.redinessProbe).enabled | default true }}
+          redinessProbe:
             httpGet:
-              path: /
-              port: http
-          */}}
+              path: {{ (.Values.redinessProbe).path | default "/_health" | quote }}
+              port: {{ (.Values.redinessProbe).port | default "http" }}
+            initialDelaySeconds: {{ (.Values.redinessProbe).initialDelaySeconds | default 30 }}
+            timeoutSeconds: {{ (.Values.redinessProbe).timeoutSeconds | default 5 }}
+            periodSeconds: {{ (.Values.redinessProbe).periodSeconds | default 10 }}
+            successThreshold: {{ (.Values.redinessProbe).successThreshold | default 1 }}
+            failureThreshold: {{ (.Values.redinessProbe).failureThreshold | default 5 }}
+          {{- end }}
+          
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 

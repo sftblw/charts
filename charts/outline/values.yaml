@@ -77,6 +77,25 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+livenessProbe:
+  enabled: true
+  failureThreshold: 6
+  initialDelaySeconds: 180
+  path: /_health
+  periodSeconds: 20
+  port: http
+  successThreshold: 1
+  timeoutSeconds: 5
+readinessProbe:
+  enabled: true
+  failureThreshold: 6
+  initialDelaySeconds: 30
+  path: /_health
+  periodSeconds: 10
+  port: http
+  successThreshold: 1
+  timeoutSeconds: 5
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
