@@ -15,6 +15,12 @@ helm repo add sftblw https://sftblw.github.io/charts
 helm upgrade --install outline sftblw/outline --values ./values.yaml --namespace outline --create-namespace
 ```
 
+### update instruction (for me)
+
+```
+helm dependency update
+```
+
 ### values.yaml sample
 
 ```yaml
