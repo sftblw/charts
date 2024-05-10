@@ -2,6 +2,34 @@ apiVersion: v1
 entries:
   outline:
   - apiVersion: v2
+    appVersion: 0.76.1
+    created: "2024-05-10T08:12:55.502833299Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.x.x
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 18.x.x
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.x.x
+    description: outlinewiki, third-party helm package.
+    digest: 5fbccade95425106f113d30d9b1a7b2c824ba0699d8b7aaf4d36c0e887ad5ada
+    name: outline
+    type: application
+    urls:
+    - https://github.com/sftblw/charts/releases/download/outline-0.1.7/outline-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     appVersion: 0.75.0
     created: "2024-02-16T05:30:10.557853773Z"
     dependencies:
@@ -169,4 +197,4 @@ entries:
     urls:
     - https://github.com/sftblw/charts/releases/download/outline-0.1.0/outline-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-16T05:30:10.557871066Z"
+generated: "2024-05-10T08:12:55.502869557Z"
